@@ -1,4 +1,5 @@
-﻿using FGSTest.Payload;
+﻿using System;
+using FGSTest.Payload;
 using SuperMaxim.Messaging;
 using UnityEngine;
 
@@ -14,19 +15,18 @@ namespace FGSTest.PlayerController
         
         private void OnCaughtPlayer(CaughtPlayerPayload payload)
         {
-            Debug.Log("Lose");
-            NotiEndGame();
+            NotiEndGame(false);
         }
         
         private void OnCatchKey(CatchKeyPayload payload)
         {
-            Debug.Log("Win");
-            NotiEndGame();
+            NotiEndGame(true);
         }
 
-        private void NotiEndGame()
+        private void NotiEndGame(bool isWin)
         {
             Messenger.Default.Publish(new GameStateUpdatePayload(GameState.EndGame));
+            Messenger.Default.Publish(new GameResultPayload(isWin));
         }
         
         private void OnDestroy()

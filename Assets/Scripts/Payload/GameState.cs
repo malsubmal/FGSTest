@@ -21,4 +21,14 @@ namespace FGSTest.Payload
             GameState = gameState;
         }
     }
+
+    [Serializable]
+    public struct GameResultPayload
+    {
+        public bool IsWin;
+        public GameResultPayload(bool isWin)
+        {
+            IsWin = isWin;
+        }
+    }
 }

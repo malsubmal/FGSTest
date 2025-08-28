@@ -2422,7 +2422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1074647395
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2590,7 +2590,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 303.8, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1133374472
 MonoBehaviour:
@@ -2612,7 +2612,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Win
+  m_text: Lose
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3694,6 +3694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1417966312}
   - component: {fileID: 1417966311}
+  - component: {fileID: 1417966313}
   m_Layer: 0
   m_Name: CanvasWinLose
   m_TagString: Untagged
@@ -3744,6 +3745,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1417966313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417966310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8faece70f1b346d7b1814f78df2f0ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameResultObj: {fileID: 1074647394}
+  _resultText: {fileID: 1133374472}
 --- !u!1001 &1439473814
 PrefabInstance:
   m_ObjectHideFlags: 0

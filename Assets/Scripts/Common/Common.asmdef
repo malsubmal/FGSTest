@@ -1,0 +1,17 @@
+{
+    "name": "Common",
+    "rootNamespace": "FGSTest.Common",
+    "references": [
+        "GUID:feffa0a89a0324527b2df83253e9afb6",
+        "GUID:f514c6ae54d03ba45a403372face0c14"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

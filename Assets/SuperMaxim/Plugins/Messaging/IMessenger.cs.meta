@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 87e73c0b5b5eb44a2bac758a4c2cac38
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160353
+  packageName: Pub-Sub Messenger
+  packageVersion: 1.0.1
+  assetPath: Assets/SuperMaxim/Plugins/Messaging/IMessenger.cs
+  uploadId: 449845

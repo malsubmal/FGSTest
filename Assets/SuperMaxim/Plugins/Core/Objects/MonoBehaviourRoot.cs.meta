@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: db78e6d00bc647b8b1c6f57934275aa0
+timeCreated: 1594158039
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160353
+  packageName: Pub-Sub Messenger
+  packageVersion: 1.0.1
+  assetPath: Assets/SuperMaxim/Plugins/Core/Objects/MonoBehaviourRoot.cs
+  uploadId: 449845

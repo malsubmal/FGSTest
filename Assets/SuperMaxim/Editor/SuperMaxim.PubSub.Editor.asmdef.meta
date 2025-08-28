@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1e60ca7dfd34f44f3990f7793940d275
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160353
+  packageName: Pub-Sub Messenger
+  packageVersion: 1.0.1
+  assetPath: Assets/SuperMaxim/Editor/SuperMaxim.PubSub.Editor.asmdef
+  uploadId: 449845

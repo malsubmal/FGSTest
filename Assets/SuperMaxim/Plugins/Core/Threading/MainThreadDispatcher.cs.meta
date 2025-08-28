@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d3e8bf064a6e04918b91da45a2b438dc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160353
+  packageName: Pub-Sub Messenger
+  packageVersion: 1.0.1
+  assetPath: Assets/SuperMaxim/Plugins/Core/Threading/MainThreadDispatcher.cs
+  uploadId: 449845

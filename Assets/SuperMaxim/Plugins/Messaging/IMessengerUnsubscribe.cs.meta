@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 2959b01f332645159dd72fe8aac0a87b
+timeCreated: 1605220471
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160353
+  packageName: Pub-Sub Messenger
+  packageVersion: 1.0.1
+  assetPath: Assets/SuperMaxim/Plugins/Messaging/IMessengerUnsubscribe.cs
+  uploadId: 449845

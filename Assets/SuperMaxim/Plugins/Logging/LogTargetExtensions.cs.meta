@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 885eef6b92c64beda36e9787a408ec9c
+timeCreated: 1622984677
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160353
+  packageName: Pub-Sub Messenger
+  packageVersion: 1.0.1
+  assetPath: Assets/SuperMaxim/Plugins/Logging/LogTargetExtensions.cs
+  uploadId: 449845

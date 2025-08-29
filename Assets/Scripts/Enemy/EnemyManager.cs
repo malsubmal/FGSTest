@@ -1,12 +1,14 @@
 ﻿using FGSTest.Enemy;
 using FGSTest.Payload;
 using SuperMaxim.Messaging;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
+[BurstCompile]
 public class EnemyManager : MonoBehaviour
 {
     private const int _maxSize = 500;
@@ -23,7 +25,7 @@ public class EnemyManager : MonoBehaviour
 
     //native array
     private NativeArray<EnemyEntityData> _enemyEntityData;
-    private NativeArray<Matrix4x4> _enemyTransformData;
+    private NativeArray<float4x4> _enemyTransformData;
     private NativeBitArray _entityDataMask;
 
     [Header("Enemy Entity Config")] [SerializeField]
@@ -59,7 +61,7 @@ public class EnemyManager : MonoBehaviour
     {
         _entityDataMask = new NativeBitArray(_maxSize, Allocator.Persistent);
         _enemyEntityData = new NativeArray<EnemyEntityData>(_maxSize, Allocator.Persistent);
-        _enemyTransformData = new NativeArray<Matrix4x4>(_maxSize, Allocator.Persistent);
+        _enemyTransformData = new NativeArray<float4x4>(_maxSize, Allocator.Persistent);
         _renderParams = new RenderParams
         {
             material = _enemyMaterial,
@@ -116,27 +118,27 @@ public class EnemyManager : MonoBehaviour
 
     private void UpdateEnemyPosition()
     {
-        EnemyManagerUtils.UpdateEnemyDistance(_entityDataMask, _enemyEntityData, _playerTracker.PlayerPosition);
+        EnemyManagerUtils.UpdateEnemyDistance(ref _entityDataMask, ref _enemyEntityData, _playerTracker.PlayerPosition);
     }
     
     private void UpdateEnemyRotation()
     {
-        EnemyManagerUtils.UpdateEnemyRotation(_entityDataMask, _enemyEntityData);
+        EnemyManagerUtils.UpdateEnemyRotation(ref _entityDataMask, ref _enemyEntityData);
     }
     
     private void UpdateEnemyTransformMats()
     {
-        EnemyManagerUtils.UpdateEnemyTransformMats(_entityDataMask, _enemyTransformData, _enemyEntityData);
+        EnemyManagerUtils.UpdateEnemyTransformMats(ref _entityDataMask, ref _enemyTransformData, ref _enemyEntityData);
     }
     
     private void UpdateEnemyChasePlayer()
     {
-        EnemyManagerUtils.UpdateEnemyChasePlayer(_entityDataMask, _enemyEntityData, _chaseSpeed, Time.deltaTime);
+        EnemyManagerUtils.UpdateEnemyChasePlayer(ref _entityDataMask, ref _enemyEntityData, _chaseSpeed, Time.deltaTime);
     }
     
     private void RenderEnemies()
     {
-        Graphics.RenderMeshInstanced(_renderParams, _enemyMesh, 0, _enemyTransformData.ToArray());
+        Graphics.RenderMeshInstanced(_renderParams, _enemyMesh, 0, _enemyTransformData.Reinterpret<Matrix4x4>());
         // const int batchSize = 20;
         // int remaining = _currentLength;
         // int offset = 0;
@@ -160,7 +162,7 @@ public class EnemyManager : MonoBehaviour
     
     private bool CheckEnemiesTouchPlayer()
     {
-        return EnemyManagerUtils.CheckEnemyTouchPlayer(_entityDataMask, _enemyEntityData, _playerTracker.PlayerPosition, _playerTracker.PlayerRadius, _radius, _centerOffsetY);
+        return EnemyManagerUtils.CheckEnemyTouchPlayer(ref _entityDataMask, ref _enemyEntityData, _playerTracker.PlayerPosition, _playerTracker.PlayerRadius, _radius, _centerOffsetY);
     }
     
 

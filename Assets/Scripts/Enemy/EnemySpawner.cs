@@ -8,6 +8,7 @@ using Unity.Mathematics;
 namespace FGSTest.Enemy
 {
 
+    [Serializable]
     public struct EnemyEntityPhysicalData
     {
         public float3 Position;
@@ -15,6 +16,7 @@ namespace FGSTest.Enemy
         public float3 MovementDirection;
     }
 
+    [Serializable]
     public struct EnemyEntityVisualData
     {
         public float YEulerRotation;
@@ -30,10 +32,11 @@ namespace FGSTest.Enemy
     }
 }
 
+[BurstCompile]
 public static class EnemyManagerUtils
 {
     [BurstCompile]
-    public static void UpdateEnemyDistance(NativeBitArray mask, NativeArray<EnemyEntityData> enemyEntityData, float3 playerPosition)
+    public static void UpdateEnemyDistance(ref NativeBitArray mask, ref NativeArray<EnemyEntityData> enemyEntityData, in float3 playerPosition)
     {
         for (int i = 0; i < enemyEntityData.Length; i++)
         {
@@ -48,9 +51,10 @@ public static class EnemyManagerUtils
             enemyEntityData[i] = entityData;
         }
     }
+    
 
     [BurstCompile]
-    public static void UpdateEnemyChasePlayer(NativeBitArray mask, NativeArray<EnemyEntityData> enemyEntityData, float constantSpeed,
+    public static void UpdateEnemyChasePlayer(ref NativeBitArray mask, ref NativeArray<EnemyEntityData> enemyEntityData, float constantSpeed,
         float deltaTime)
     {
         for (int i = 0; i < enemyEntityData.Length; i++)
@@ -65,7 +69,7 @@ public static class EnemyManagerUtils
     }
         
     [BurstCompile]
-    public static void UpdateEnemyRotation(NativeBitArray mask, NativeArray<EnemyEntityData> enemyEntityData)
+    public static void UpdateEnemyRotation(ref NativeBitArray mask, ref NativeArray<EnemyEntityData> enemyEntityData)
     {
         for (int i = 0; i < enemyEntityData.Length; i++)
         {
@@ -79,7 +83,7 @@ public static class EnemyManagerUtils
     
     
     [BurstCompile]
-    public static void UpdateEnemyTransformMats(NativeBitArray mask, NativeArray<Matrix4x4> transformData, NativeArray<EnemyEntityData> enemyEntityData)
+    public static void UpdateEnemyTransformMats(ref NativeBitArray mask, ref NativeArray<float4x4> transformData, ref NativeArray<EnemyEntityData> enemyEntityData)
     {
         for (int i = 0; i < enemyEntityData.Length; i++)
         {
@@ -91,10 +95,10 @@ public static class EnemyManagerUtils
         }
     }
     
-    static float3 up = new float3(0, 1, 0);
+    static readonly float3 up = new float3(0, 1, 0);
 
     [BurstCompile]
-    public static bool CheckEnemyTouchPlayer(NativeBitArray mask, NativeArray<EnemyEntityData> enemyEntityData, float3 playPos, float playerRadius, float enemyRadius, float centerOffsetY)
+    public static bool CheckEnemyTouchPlayer(ref NativeBitArray mask, ref NativeArray<EnemyEntityData> enemyEntityData,  in float3 playPos, float playerRadius, float enemyRadius, float centerOffsetY)
     {
         for (int i = 0; i < enemyEntityData.Length; i++)
         {

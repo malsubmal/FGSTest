@@ -1,4 +1,5 @@
-﻿using FGSTest.Enemy;
+﻿using FGSTest.Common;
+using FGSTest.Enemy;
 using FGSTest.Payload;
 using SuperMaxim.Messaging;
 using Unity.Burst;
@@ -9,13 +10,12 @@ using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
 [BurstCompile]
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : BaseGameSystem
 {
     private const int _maxSize = 500;
 
-    [Header("Spawn Config")] [SerializeField]
-    private float _radiusSpawn;
-
+    [Header("Spawn Config")] 
+    [SerializeField] private float _radiusSpawn;
     [SerializeField] private float _rateSpawn;
 
     [Header("Process Config")]
@@ -28,34 +28,25 @@ public class EnemyManager : MonoBehaviour
     private NativeArray<float4x4> _enemyTransformData;
     private NativeBitArray _entityDataMask;
 
-    [Header("Enemy Entity Config")] [SerializeField]
-    private float _radius;
+    [Header("Enemy Entity Config")] 
+    [SerializeField] private float _radius;
 
     [SerializeField] private float _height;
     [SerializeField] private float _chaseSpeed;
     [SerializeField] private float _centerOffsetY;
 
-    [Header("External Ref")] [SerializeField]
-    private PlayerTracker _playerTracker;
+    [Header("External Ref")] 
+    [SerializeField] private PlayerTracker _playerTracker;
 
-    [Header("Render Params")] [SerializeField]
-    private Material _enemyMaterial;
-
+    [Header("Render Params")] 
+    [SerializeField] private Material _enemyMaterial;
     [SerializeField] private Mesh _enemyMesh;
 
     private float _countDownSpawn;
-
     //private int _partitionIndex;
     //private int _cleanupCountDown;
     private int _currentLength;
-    private bool _isRunning;
     private RenderParams _renderParams;
-
-    private void Awake()
-    {
-        Messenger.Default.Subscribe<GameStateUpdatePayload>(OnGameStateUpdate);
-        _isRunning = true;
-    }
     
     private void Start()
     {
@@ -71,9 +62,8 @@ public class EnemyManager : MonoBehaviour
         };
     }
     
-    private void FixedUpdate()
+    protected override void SystemFixedUpdate()
     {
-        if (!_isRunning)    return;
         
         ProcessCountDownSpawn();
         //ProcessCleanupCountDown();
@@ -93,29 +83,11 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected override void SystemUpdate()
     {
-        if (!_isRunning)    return;
-        
         RenderEnemies();
     }
     
-    private void OnGameStateUpdate(GameStateUpdatePayload payload)
-    {
-        //ideally trigger disappear animation vfx
-        
-        if (payload.GameState != GameState.EndGame)
-            return;
-        
-        DespawnAllEnemy();
-    }
-
-    private void DespawnAllEnemy()
-    {
-        //just stop running the system for now
-        _isRunning = false;
-    }
-
     private void UpdateEnemyPosition()
     {
         EnemyManagerUtils.UpdateEnemyDistance(ref _entityDataMask, ref _enemyEntityData, _playerTracker.PlayerPosition);
@@ -228,9 +200,8 @@ public class EnemyManager : MonoBehaviour
         return _currentLength >= _maxSize - 1;
     }
 
-    private void OnDestroy()
+    protected override void SystemDestroy()
     {
-        Messenger.Default.Unsubscribe<GameStateUpdatePayload>(OnGameStateUpdate);
         _entityDataMask.Dispose();
         _enemyEntityData.Dispose();
         _enemyTransformData.Dispose();

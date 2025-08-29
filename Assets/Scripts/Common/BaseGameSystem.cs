@@ -1,4 +1,5 @@
-﻿using FGSTest.Payload;
+﻿using System;
+using FGSTest.Payload;
 using SuperMaxim.Messaging;
 using UnityEngine;
 
@@ -18,7 +19,29 @@ namespace FGSTest.Common
         protected virtual void SystemAwake()
         {
         }
+
+        private void Update()
+        {
+            if (!_isSystemActive) return;
+            
+            SystemUpdate();
+        }
         
+        protected virtual void SystemUpdate()
+        {
+        }
+        
+        private void FixedUpdate()
+        {
+            if (!_isSystemActive) return;
+            
+            SystemFixedUpdate();
+        }
+        
+        protected virtual void SystemFixedUpdate()
+        {
+        }
+
         private void OnGameStateUpdate(GameStateUpdatePayload payload)
         {
             _isSystemActive = payload.GameState == GameState.Running;

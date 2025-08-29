@@ -12,7 +12,12 @@ namespace FGSTest.PlayerController
             Messenger.Default.Subscribe<CaughtPlayerPayload>(OnCaughtPlayer);
             Messenger.Default.Subscribe<CatchKeyPayload>(OnCatchKey);
         }
-        
+
+        private void Start()
+        {
+            Messenger.Default.Publish(new GameStateUpdatePayload(GameState.Running));
+        }
+
         private void OnCaughtPlayer(CaughtPlayerPayload payload)
         {
             NotiEndGame(false);
